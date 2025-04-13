@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  prueba1_1:
+  imagen servise_image:1
+  enviroment:
+    - SPRING_PROFILES_ACTIVE=dev
+  ports:
+      - target:8080
+      published: 8080
+      protocol: tcp
+      mode: host
+  dbprueba1_1:
+  image: postgres:17.4
+  environment:
+    -TZ=America/Guayaquil
+    -POSTGRES_DB=servidor1
+    -POSTGRES_PASSWORD=12345
+    -POSTGRES_USER=postgres
+    -PGDATA=/var/lib/postgresql/data/pgdata
+  volumes:
+    -pg_prueba1:/var/lib/postgresql/data/pgdata
+  networks:
+    -prueba1_net
+
+
+  volumes:
+    pg_prueba1:
+      external:true
+
+  network:
+    prueba1_net:
+      external:true
